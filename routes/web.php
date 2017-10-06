@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/discuss', function () {
+    return view('discuss');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -39,4 +43,19 @@ Route::group(['middleware' => 'auth'], function()
 {
 
     Route::resource('channels', 'ChannelsController');
+
+    Route::get('/discussion/create', [
+
+        'uses' => 'DiscussionsController@create',
+
+        'as' => 'discussion.create'
+    ]);
+
+    Route::post('/discussion/store', [
+        
+        'uses' => 'DiscussionsController@store',
+
+        'as' => 'discussion.store'
+    ]);
+        
 });

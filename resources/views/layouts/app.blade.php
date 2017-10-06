@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -29,7 +29,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name') }}
                     </a>
                 </div>
 
@@ -71,7 +71,46 @@
             </div>
         </nav>
 
-        @yield('content')
+        <div class="container">
+            <div class="col-md-4">
+
+                <a href=" {{ route('discussion.create') }} " class="form-control btn btn-primary form-group">Create a New Discussion</a>
+
+                <br>
+                <br>
+
+                <div class="panel panel-default">
+                
+                    <div class="panel-heading">
+                        
+                        Chanels                    
+                    
+                    </div>
+                    
+                    <div class="panel-body">
+
+                        <ul class="list-group">
+                        
+                            @foreach($channels as $channel)
+
+                                <li class="list-group-item"> {{ $channel->title }} </li>
+
+                            @endforeach
+
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-8">
+
+                @yield('content')
+
+            </div>
+
+        </div>
     </div>
 
     <!-- Scripts -->
