@@ -21,7 +21,13 @@ Route::get('/discuss', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/forum', [
+
+    'uses' => 'ForumController@index',
+
+    'as' => 'forum'
+
+]);
 
 Route::get('{provider}/auth', [
 
@@ -65,5 +71,11 @@ Route::group(['middleware' => 'auth'], function()
         'as' => 'discussion.store'
     ]);
 
+    Route::post('/discussion/reply/{id}', [
+
+        'uses' => 'DiscussionsController@reply',
+
+        'as' => 'discussion.reply'
+    ]);
         
 });

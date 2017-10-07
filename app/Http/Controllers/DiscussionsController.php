@@ -8,6 +8,8 @@ use App\Discussion;
 
 use Auth;
 
+use App\Reply;
+
 use Session;
 
 class DiscussionsController extends Controller
@@ -54,5 +56,26 @@ class DiscussionsController extends Controller
         $discussion = Discussion::where('slug', $slug)->first();
 
         return view('discussions.show')->with('discussion', $discussion);
+    }
+
+    public function reply($id)
+    
+    {
+
+        $discussion = Discussion::find($id);
+
+        $reply = Reply::create([
+
+            'user_id' => Auth::id(),
+
+            'discussion_id' => $id,
+            
+            'content' => request()->content,
+            
+        ]);
+
+        Session::flash('success', 'Replied to discussion.');
+
+        return redirect()->back();
     }
 }

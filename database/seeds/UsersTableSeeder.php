@@ -23,7 +23,21 @@ class UsersTableSeeder extends Seeder
 
             'admin' => 1,
 
-            'avatar' => asset('images/uploads/avatars/default.jpg')
+            'avatar' => 'images/uploads/avatars/profile.jpg'
+
+        ]);
+
+        App\User::create([
+            
+            'name' => 'Danilo Tiago',
+
+            'password' => bcrypt('password'),
+
+            'email' => 'contato@danilotiago.com',
+
+            'admin' => 2,
+
+            'avatar' => 'images/uploads/avatars/default.jpg'
 
         ]);
     }
