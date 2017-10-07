@@ -8,7 +8,7 @@ class Discussion extends Model
 {
     //
 
-    protected $fillable = ['user_id', 'channel_id', 'title', 'content'];
+    protected $fillable = ['user_id', 'channel_id', 'title', 'content', 'slug'];
 
     public function channel()
 

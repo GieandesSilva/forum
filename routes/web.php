@@ -51,11 +51,19 @@ Route::group(['middleware' => 'auth'], function()
         'as' => 'discussion.create'
     ]);
 
+    Route::get('/discussion/{slug}', [
+
+        'uses' => 'DiscussionsController@show',
+
+        'as' => 'discussion'
+    ]);
+
     Route::post('/discussion/store', [
         
         'uses' => 'DiscussionsController@store',
 
         'as' => 'discussion.store'
     ]);
+
         
 });

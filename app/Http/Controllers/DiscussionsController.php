@@ -38,11 +38,21 @@ class DiscussionsController extends Controller
             'title' => $request->title,
             'channel_id' => $request->channel_id,
             'content' => $request->content,
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
+            'slug' => str_slug($request->title)
         ]);
 
-        Session::flash('success', 'Discussion created successfully.');
+        Session::flash('success', 'Discussion successfully created.');
 
-        return redirect()->back();
+        return redirect()->route('discussion', ['slug' => $discussion->slug]);
+    }
+
+    public function show($slug)
+
+    {
+
+        $discussion = Discussion::where('slug', $slug)->first();
+
+        return view('discussions.show')->with('discussion', $discussion);
     }
 }
