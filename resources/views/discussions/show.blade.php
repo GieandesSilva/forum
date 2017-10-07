@@ -53,7 +53,15 @@
             </div>
             <div class="panel-footer">
 
-                LIKE
+                @if($reply->is_liked_by_auth_user())
+
+                    <a href="{{ route('reply.unlike', [ 'id' => $reply->id ]) }}" class="btn btn-xs btn-danger">Unlike</a>                
+                
+                @else
+                
+                    <a href="{{ route('reply.like', [ 'id' => $reply->id ]) }}" class="btn btn-xs btn-success">Like</a>                
+
+                @endif
 
             </div>
 
