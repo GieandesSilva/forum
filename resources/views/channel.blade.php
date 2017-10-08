@@ -23,18 +23,15 @@
             <div class="panel-footer">
                 @if($discussion->replies->count = 0)    
                     
-                    <span>No Reply Yet </span>
-                    <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
+                    <p>No Reply Yet </p>
 
                 @elseif($discussion->replies->count = 1)    
                 
-                    <span>{{ $discussion->replies->count() }} Reply </span>
-                    <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
+                    <p>{{ $discussion->replies->count() }} Reply </p>
                 
                 @else
                 
-                    <span>{{ $discussion->replies->count() }} Replies </span>
-                    <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
+                    <p>{{ $discussion->replies->count() }} Replies </p>
 
                 @endif
             </div>

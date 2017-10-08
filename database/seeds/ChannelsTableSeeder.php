@@ -16,14 +16,14 @@ class ChannelsTableSeeder extends Seeder
     {
         //
 
-        $channel1 =  ['title' => 'HTML'];
-        $channel2 =  ['title' => 'CSS'];
-        $channel3 =  ['title' => 'Javascript'];
-        $channel4 =  ['title' => 'Ajax'];
-        $channel5 =  ['title' => 'Jquery'];
-        $channel6 =  ['title' => 'PHP'];
-        $channel7 =  ['title' => 'Java'];
-        $channel8 =  ['title' => 'Ruby'];
+        $channel1 =  [ 'title' => 'HTML', 'slug' => str_slug('HTML') ];
+        $channel2 =  [ 'title' => 'CSS', 'slug' => str_slug('CSS') ];
+        $channel3 =  [ 'title' => 'Javascript', 'slug' => str_slug('Javascript') ];
+        $channel4 =  [ 'title' => 'Ajax', 'slug' => str_slug('Ajax') ];
+        $channel5 =  [ 'title' => 'Jquery', 'slug' => str_slug('Jquery') ];
+        $channel6 =  [ 'title' => 'PHP', 'slug' => str_slug('PHP') ];
+        $channel7 =  [ 'title' => 'Java', 'slug' => str_slug('Java') ];
+        $channel8 =  [ 'title' => 'Ruby', 'slug' => str_slug('Ruby') ];
 
 
         Channel::create($channel1);

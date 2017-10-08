@@ -28,7 +28,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/forum') }}">
+                    <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name') }}
                     </a>
                 </div>
@@ -81,19 +81,30 @@
 
                 <div class="panel panel-default">
                 
-                    <div class="panel-heading">
+                    <div class="panel-body">
                         
-                        Chanels                    
+                        <ul class="list-group">
+                        
+                            <li class="list-group-item">
+
+                                <a href="/forum" style="text-decoration:none;"> HOME </a>
+                            
+                            </li>
+                    
+                        </ul>         
                     
                     </div>
-                    
+                </div>                    
+
+                <div class="panel panel-default">
+
                     <div class="panel-body">
 
                         <ul class="list-group">
                         
                             @foreach($channels as $channel)
 
-                                <li class="list-group-item"> {{ $channel->title }} </li>
+                                <a href="{{ route('channel', ['slug' => $channel->slug]) }}" style="text-decoration:none;"><li class="list-group-item"> {{ $channel->title }} </li></a>
 
                             @endforeach
 

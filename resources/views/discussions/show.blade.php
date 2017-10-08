@@ -13,25 +13,28 @@
 
         <div class="panel-body">
 
-            <h4 class="text-center"><a href="{{ route('discussion', ['slug' => $discussion->slug]) }}">{{ $discussion->title }}</a></h4>
+            <h4 class="text-center"><a href="{{ route('discussion', ['slug' => $discussion->slug]) }}" style="text-decoration:none;">{{ $discussion->title }}</a></h4>
             <p>{{ $discussion->content }}</p>
 
         </div>
         <div class="panel-footer">
-            @if($discussion->replies->count = 0)    
-                
-                <p>No Reply Yet </p>
+        @if($discussion->replies->count = 0)    
+            
+            <span>No Reply Yet </span>
+            <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
 
-            @elseif($discussion->replies->count = 1)    
-            
-                <p>{{ $discussion->replies->count() }} Reply </p>
-            
-            @else
-            
-                <p>{{ $discussion->replies->count() }} Replies </p>
+        @elseif($discussion->replies->count = 1)    
+        
+            <span>{{ $discussion->replies->count() }} Reply </span>
+            <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
+        
+        @else
+        
+            <span>{{ $discussion->replies->count() }} Replies </span>
+            <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
 
-            @endif
-        </div>
+        @endif
+    </div>
 
     </div>
 
@@ -55,11 +58,31 @@
 
                 @if($reply->is_liked_by_auth_user())
 
-                    <a href="{{ route('reply.unlike', [ 'id' => $reply->id ]) }}" class="btn btn-xs btn-danger">Unlike</a>                
-                
+                    <a href="{{ route('reply.unlike', [ 'id' => $reply->id ]) }}" class="btn btn-xs btn-danger">Unlike</a>
+                    
+                    @if($reply->likes->count() == 1)
+                    
+                        <p class="pull-right">{{ $reply->likes->count() }} like</p>               
+
+                    @else
+
+                        <p class="pull-right">{{ $reply->likes->count() }} likes</p>               
+
+                    @endif
+
                 @else
                 
                     <a href="{{ route('reply.like', [ 'id' => $reply->id ]) }}" class="btn btn-xs btn-success">Like</a>                
+
+                    @if($reply->likes->count() == 1)
+                    
+                        <p class="pull-right">{{ $reply->likes->count() }} like</p>               
+
+                    @else
+
+                        <p class="pull-right">{{ $reply->likes->count() }} likes</p>               
+
+                    @endif
 
                 @endif
 
@@ -72,22 +95,35 @@
 
     <div class="panel panel-default">
 
+        
         <div class="panel-body">
+            
+            @if(Auth::check())
 
-            <form action="{{ route('discussion.reply', ['id' => $discussion->id]) }}" method="post">
-                
-                {{ csrf_field() }}
-                
-                <div class="form-group">
-                    <label for="reply"> Leave  a Replay </label>
-                    <textarea name="content" id="reply" cols="30" rows="5" class="form-control"></textarea>
+                <form action="{{ route('discussion.reply', ['id' => $discussion->id]) }}" method="post">
+                    
+                    {{ csrf_field() }}
+                    
+                    <div class="form-group">
+                        <label for="reply"> Leave  a Replay </label>
+                        <textarea name="content" id="reply" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-success pull-right" type="submit"> Send </button>
+                    </div>
+
+                </form>
+            
+            @else
+            
+                <div class="text-center">
+                    
+                    <h2>Sign In To Leave a Reply</h2>
+                    
                 </div>
-
-                <div class="form-group">
-                    <button class="btn btn-success pull-right" type="submit"> Send </button>
-                </div>
-
-            </form>
+            
+            @endif
 
         </div>
 
