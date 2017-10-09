@@ -7,7 +7,7 @@
         <div class="panel-heading">
 
             <img src="{{ asset($discussion->user->avatar) }}" alt="Avatar User" style="width:50px; heigth:50px; border-radius:50%;">&nbsp;&nbsp;&nbsp;
-            <span> {{ $discussion->user->name }},&nbsp; <b>{{ $discussion->created_at->diffForHumans() }}</b></span>
+            <span> {{ $discussion->user->name }},&nbsp; <b>({{ $discussion->user->points }}) - {{ $discussion->created_at->diffForHumans() }}</b></span>
 
             @if($discussion->is_being_watched_by_auth_user())
 
@@ -33,7 +33,7 @@
                     <div class="panel-heading">
 
                         <img src="{{ asset($best_answer->user->avatar) }}" alt="Avatar User" style="width:35px; heigth:35px; border-radius:50%;">&nbsp;&nbsp;&nbsp;
-                        <span> {{ $best_answer->user->name }}</span>
+                        <span> {{ $best_answer->user->name }},&nbsp; <b>({{ $best_answer->user->points }})</b> - {{ $best_answer->created_at->diffForHumans() }}</span>
 
                     </div>
                     <div class="panel-body">
@@ -79,7 +79,7 @@
         <div class="panel-heading">
 
             <img src="{{ asset($reply->user->avatar) }}" alt="Avatar User" style="width:30px; heigth:30px; border-radius:50%;">&nbsp;&nbsp;&nbsp;
-            <span> {{ $reply->user->name }},&nbsp; <b>{{ $reply->created_at->diffForHumans() }}</b>  </span>
+            <span> {{ $reply->user->name }},&nbsp; <b>({{ $reply->user->points }})</b> - <b>{{ $reply->created_at->diffForHumans() }}</b>  </span>
 
             @if(!$best_answer)
 

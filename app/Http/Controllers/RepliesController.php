@@ -56,6 +56,10 @@ class RepliesController extends Controller
 
         $reply->save();
 
+        $reply->user->points += 100;
+
+        $reply->user->save();
+
         Session::flash('success', 'Reply has been marked as the best answer.');
 
         return redirect()->back();

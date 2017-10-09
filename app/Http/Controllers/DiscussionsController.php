@@ -81,6 +81,10 @@ class DiscussionsController extends Controller
             
         ]);
 
+        $reply->user->points += 25;
+
+        $reply->user->save();
+
         $watchers = array();
         
         foreach($discussion->watchers as $watcher):
