@@ -7,7 +7,17 @@
         <div class="panel-heading">
 
             <img src="{{ asset($discussion->user->avatar) }}" alt="Avatar User" style="width:50px; heigth:50px; border-radius:50%;">&nbsp;&nbsp;&nbsp;
-            <span> {{ $discussion->user->name }},&nbsp; <b>{{ $discussion->created_at->diffForHumans() }}</b>  </span>
+            <span> {{ $discussion->user->name }},&nbsp; <b>{{ $discussion->created_at->diffForHumans() }}</b></span>
+
+            @if($discussion->is_being_watched_by_auth_user())
+
+                <a href="{{ route('discussion.unwatch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-default pull-right" style="margin-top: 15px;">unwatch</a>
+            
+            @else
+
+                <a href="{{ route('discussion.watch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-info pull-right" style="margin-top: 15px;">Watch</a>            
+            
+            @endif
 
         </div>
 
