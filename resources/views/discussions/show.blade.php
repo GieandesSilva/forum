@@ -25,80 +25,109 @@
 
             <h4 class="text-center"><a href="{{ route('discussion', ['slug' => $discussion->slug]) }}" style="text-decoration:none;">{{ $discussion->title }}</a></h4>
             <p>{{ $discussion->content }}</p>
+            <hr>
+            @if($best_answer)
+
+                <div class="panel panel-success">
+                    <h4 class="text-center">Best Answer</h4>
+                    <div class="panel-heading">
+
+                        <img src="{{ asset($best_answer->user->avatar) }}" alt="Avatar User" style="width:35px; heigth:35px; border-radius:50%;">&nbsp;&nbsp;&nbsp;
+                        <span> {{ $best_answer->user->name }}</span>
+
+                    </div>
+                    <div class="panel-body">
+
+                        <p>{{ $best_answer->content }}</p>
+
+                    </div>
+
+                </div>
+            @endif            
 
         </div>
         <div class="panel-footer">
-        @if($discussion->replies->count = 0)    
+
+            @if($discussion->replies)
+
+                @if($discussion->replies->count() == 1)    
+                
+                    <span>{{ $discussion->replies->count() }} Reply </span>
+                    <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
+                
+                @else
+                
+                    <span>{{ $discussion->replies->count() }} Replies </span>
+                    <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
+
+                @endif
             
-            <span>No Reply Yet </span>
-            <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
+            @else
 
-        @elseif($discussion->replies->count = 1)    
-        
-            <span>{{ $discussion->replies->count() }} Reply </span>
-            <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
-        
-        @else
-        
-            <span>{{ $discussion->replies->count() }} Replies </span>
-            <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
+                <span>No Reply Yet </span>
+                <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
 
-        @endif
-    </div>
+            @endif
 
+        </div>
     </div>
 
     @foreach($discussion->replies as $reply)
 
-        <div class="panel panel-default">
+    <div class="panel panel-default">
 
-            <div class="panel-heading">
+        <div class="panel-heading">
 
-                <img src="{{ asset($reply->user->avatar) }}" alt="Avatar User" style="width:30px; heigth:30px; border-radius:50%;">&nbsp;&nbsp;&nbsp;
-                <span> {{ $reply->user->name }},&nbsp; <b>{{ $reply->created_at->diffForHumans() }}</b>  </span>
+            <img src="{{ asset($reply->user->avatar) }}" alt="Avatar User" style="width:30px; heigth:30px; border-radius:50%;">&nbsp;&nbsp;&nbsp;
+            <span> {{ $reply->user->name }},&nbsp; <b>{{ $reply->created_at->diffForHumans() }}</b>  </span>
 
-            </div>
+            @if(!$best_answer)
 
-            <div class="panel-body">
+                <a href="{{ route('discussion.best.answer', ['id' => $reply->id]) }}" class="btn btn-xs btn-default pull-right" style="margin-top:5px;">Best Answer</a>
 
-                <p>{{ $reply->content }}</p>
+            @endif
+        </div>
 
-            </div>
-            <div class="panel-footer">
+        <div class="panel-body">
 
-                @if($reply->is_liked_by_auth_user())
+            <p>{{ $reply->content }}</p>
 
-                    <a href="{{ route('reply.unlike', [ 'id' => $reply->id ]) }}" class="btn btn-xs btn-danger">Unlike</a>
-                    
-                    @if($reply->likes->count() == 1)
-                    
-                        <p class="pull-right">{{ $reply->likes->count() }} like</p>               
+        </div>
+        <div class="panel-footer">
 
-                    @else
+            @if($reply->is_liked_by_auth_user())
 
-                        <p class="pull-right">{{ $reply->likes->count() }} likes</p>               
-
-                    @endif
+                <a href="{{ route('reply.unlike', [ 'id' => $reply->id ]) }}" class="btn btn-xs btn-danger">Unlike</a>
+                
+                @if($reply->likes->count() == 1)
+                
+                    <p class="pull-right">{{ $reply->likes->count() }} like</p>               
 
                 @else
-                
-                    <a href="{{ route('reply.like', [ 'id' => $reply->id ]) }}" class="btn btn-xs btn-success">Like</a>                
 
-                    @if($reply->likes->count() == 1)
-                    
-                        <p class="pull-right">{{ $reply->likes->count() }} like</p>               
-
-                    @else
-
-                        <p class="pull-right">{{ $reply->likes->count() }} likes</p>               
-
-                    @endif
+                    <p class="pull-right">{{ $reply->likes->count() }} likes</p>               
 
                 @endif
 
-            </div>
+            @else
+            
+                <a href="{{ route('reply.like', [ 'id' => $reply->id ]) }}" class="btn btn-xs btn-success">Like</a>                
+
+                @if($reply->likes->count() == 1)
+                
+                    <p class="pull-right">{{ $reply->likes->count() }} like</p>               
+
+                @else
+
+                    <p class="pull-right">{{ $reply->likes->count() }} likes</p>               
+
+                @endif
+
+            @endif
 
         </div>
+
+    </div>
 
 
     @endforeach

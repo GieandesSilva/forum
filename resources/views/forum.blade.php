@@ -29,22 +29,28 @@
 
             </div>
             <div class="panel-footer">
-                @if($discussion->replies->count = 0)    
+
+                @if($discussion->replies)
+
+                    @if($discussion->replies->count() == 1)    
                     
+                        <span>{{ $discussion->replies->count() }} Reply </span>
+                        <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
+                    
+                    @else
+                    
+                        <span>{{ $discussion->replies->count() }} Replies </span>
+                        <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
+
+                    @endif
+                
+                @else
+
                     <span>No Reply Yet </span>
                     <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
 
-                @elseif($discussion->replies->count = 1)    
-                
-                    <span>{{ $discussion->replies->count() }} Reply </span>
-                    <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
-                
-                @else
-                
-                    <span>{{ $discussion->replies->count() }} Replies </span>
-                    <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}" class="btn-xs pull-right" style="text-decoration:none">{{ $discussion->channel->title }}</a>
-
                 @endif
+                
             </div>
 
         </div>
