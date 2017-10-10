@@ -9,7 +9,7 @@
             <div class="panel-heading">
             
                 <img src="{{ asset($discussion->user->avatar) }}" alt="Avatar User" style="width:30px; heigth:30px; border-radius:50%;">&nbsp;&nbsp;&nbsp;
-                <span> {{ $discussion->user->name }},&nbsp; <b>{{ $discussion->created_at->diffForHumans()}}</b>  </span>
+                <span> {{ $discussion->user->name }},&nbsp; <b>({{ $discussion->user->points }})</b> - {{ $discussion->created_at->diffForHumans()}}</span>
 
                 @if($discussion->is_being_watched_by_auth_user())
 

@@ -12,7 +12,7 @@
 
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" name="title" id="title" class="form-control">
+                    <input type="text" name="title" id="title" value="{{ old('title')}}" class="form-control">
                 </div>
             
                 <div class="form-group">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label for="content"> Ask a Question:</label>
-                    <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="content" id="content" cols="30" rows="10" class="form-control">{{ old('content') }}</textarea>
                 </div>
                 <div class="form-group text-right">
                     <button class="btn btn-success" type="submit">  Store Discussion </button>

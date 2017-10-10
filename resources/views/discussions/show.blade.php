@@ -83,8 +83,11 @@
 
             @if(!$best_answer)
 
-                <a href="{{ route('discussion.best.answer', ['id' => $reply->id]) }}" class="btn btn-xs btn-default pull-right" style="margin-top:5px;">Best Answer</a>
+                @if(Auth::id() == $discussion->user->id)
 
+                    <a href="{{ route('discussion.best.answer', ['id' => $reply->id]) }}" class="btn btn-xs btn-default pull-right" style="margin-top:5px;">Best Answer</a>
+                @endif
+                
             @endif
         </div>
 

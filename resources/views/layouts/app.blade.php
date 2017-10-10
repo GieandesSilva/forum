@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <body>
     <div id="app">
@@ -71,6 +72,20 @@
             </div>
         </nav>
 
+        <div class="container text-center">
+
+            @if($errors->count() > 0)
+
+                @foreach($errors->all() as $error)
+
+                    <p class="text-danger">{{ $error }}</p>
+
+                @endforeach
+
+            @endif
+
+        </div>
+
         <div class="container">
             <div class="col-md-4">
 
@@ -126,5 +141,17 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+
+        @if(Session::has('success'))
+
+            toastr.success('{{ Session::get('success') }}')
+
+
+        @endif
+
+    
+    </script>
 </body>
 </html>
