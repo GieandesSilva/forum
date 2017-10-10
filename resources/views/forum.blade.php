@@ -11,13 +11,23 @@
                 <img src="{{ asset($discussion->user->avatar) }}" alt="Avatar User" style="width:30px; heigth:30px; border-radius:50%;">&nbsp;&nbsp;&nbsp;
                 <span> {{ $discussion->user->name }},&nbsp; <b>({{ $discussion->user->points }})</b> - {{ $discussion->created_at->diffForHumans()}}</span>
 
+                @if($discussion->hasBestAnswer())
+
+                    <span class="btn btn-success btn-xs pull-right" style="margin-top: 5px;">CLOSED</span>
+
+                @else
+
+                    <span class="btn btn-danger btn-xs pull-right" style="margin-top: 5px;">OPEN</span>
+
+                @endif
+
                 @if($discussion->is_being_watched_by_auth_user())
 
-                    <a href="{{ route('discussion.unwatch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-default pull-right" style="margin-top: 5px;">unwatch</a>
+                    <a href="{{ route('discussion.unwatch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-default pull-right" style="margin-top: 5px; margin-right:5px;">unwatch</a>
             
                 @else
 
-                    <a href="{{ route('discussion.watch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-info pull-right" style="margin-top: 5px;">Watch</a>            
+                    <a href="{{ route('discussion.watch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-info pull-right" style="margin-top: 5px; margin-right:5px;">Watch</a>            
                 
                 @endif
             </div>
