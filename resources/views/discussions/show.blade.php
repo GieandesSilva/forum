@@ -30,7 +30,7 @@
         <div class="panel-body">
 
             <h4 class="text-center"><a href="{{ route('discussion', ['slug' => $discussion->slug]) }}" style="text-decoration:none;">{{ $discussion->title }}</a></h4>
-            <p>{{ $discussion->content }}</p>
+            <p>{!! Markdown::convertToHtml($discussion->content) !!}</p>
             <hr>
             @if($best_answer)
 
@@ -44,7 +44,7 @@
                     </div>
                     <div class="panel-body">
 
-                        <p>{{ $best_answer->content }}</p>
+                        <p>{!! Markdown::convertToHtml($best_answer->content) !!}</p>
 
                     </div>
 
@@ -113,7 +113,7 @@
 
         <div class="panel-body">
 
-            <p>{{ $reply->content }}</p>
+            <p>{!! Markdown::convertToHtml($reply->content) !!}</p>
 
         </div>
         <div class="panel-footer">
