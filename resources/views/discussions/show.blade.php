@@ -9,13 +9,19 @@
             <img src="{{ asset($discussion->user->avatar) }}" alt="Avatar User" style="width:50px; heigth:50px; border-radius:50%;">&nbsp;&nbsp;&nbsp;
             <span> {{ $discussion->user->name }},&nbsp; <b>({{ $discussion->user->points }}) - {{ $discussion->created_at->diffForHumans() }}</b></span>
 
+            @if($discussion->user->id == Auth::id()) 
+
+                <a href="{{ route('discussion.edit', ['slug' => $discussion->slug]) }}" class="btn btn-xs btn-warning pull-right" style="margin-top: 15px;">Edit</a>
+            
+            @endif       
+
             @if($discussion->is_being_watched_by_auth_user())
 
-                <a href="{{ route('discussion.unwatch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-default pull-right" style="margin-top: 15px;">unwatch</a>
+                <a href="{{ route('discussion.unwatch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-default pull-right" style="margin-top: 15px; margin-right:5px;">unwatch</a>
             
             @else
 
-                <a href="{{ route('discussion.watch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-info pull-right" style="margin-top: 15px;">Watch</a>            
+                <a href="{{ route('discussion.watch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-info pull-right" style="margin-top: 15px; margin-right:5px;">Watch</a>            
             
             @endif
 
@@ -86,8 +92,22 @@
                 @if(Auth::id() == $discussion->user->id)
 
                     <a href="{{ route('discussion.best.answer', ['id' => $reply->id]) }}" class="btn btn-xs btn-default pull-right" style="margin-top:5px;">Best Answer</a>
-                @endif
                 
+                @endif
+
+
+
+            @endif
+
+            @if(!$best_answer)
+
+                @if(Auth::id() == $reply->user_id)
+
+
+                    <a href="{{ route('reply.edit', ['id' => $reply->id]) }}" class="btn btn-xs btn-warning pull-right" style="margin-top:5px; margin-right: 5px;">Edit</a>
+
+                @endif
+
             @endif
         </div>
 

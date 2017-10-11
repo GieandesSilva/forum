@@ -30,6 +30,7 @@
                     <a href="{{ route('discussion.watch', ['id' => $discussion->id]) }}" class="btn btn-xs btn-info pull-right" style="margin-top: 5px; margin-right:5px;">Watch</a>            
                 
                 @endif
+
             </div>
 
             <div class="panel-body">

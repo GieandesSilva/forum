@@ -102,13 +102,55 @@
                         
                             <li class="list-group-item">
 
-                                <a href="/forum" style="text-decoration:none;"> HOME </a>
+                                <a href="/forum" style="text-decoration:none;"> Home </a>
+                            
+                            </li>
+
+                            <li class="list-group-item">
+
+                                <a href="/forum?filter=me" style="text-decoration:none;"> My Discussions </a>
+                            
+                            </li>
+
+                            <li class="list-group-item">
+
+                                <a href="/forum?filter=solved" style="text-decoration:none;"> Discussions Answered </a>
+                            
+                            </li>
+
+                            <li class="list-group-item">
+
+                                <a href="/forum?filter=unsolved" style="text-decoration:none;"> Discussions Unanswered </a>
                             
                             </li>
                     
                         </ul>         
                     
                     </div>
+
+                @if(Auth::check())
+
+                    @if(Auth::user()->admin)
+
+                        <div class="panel-body">
+                            
+                            <ul class="list-group">
+                            
+                                <li class="list-group-item">
+
+                                    <a href="/channels" style="text-decoration:none;"> Channels </a>
+                                
+                                </li>
+                        
+                            </ul>         
+                        
+                        </div>
+
+                    @endif
+
+                @endif
+
+
                 </div>                    
 
                 <div class="panel panel-default">
